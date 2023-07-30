@@ -3,8 +3,10 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useEffect } from "react";
+import { styled } from "styled-components";
 
-import CharactersListComponent from "components/CharactersList.component";
+import CharactersPageComponent from "@/components/CharactersPage.component";
+import Pagination from "@/components/Pagination.component";
 export default function Home() {
     return (
         <>
@@ -18,11 +20,23 @@ export default function Home() {
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
-                {/* <link rel="icon" href="/favicon.ico" />  */}
             </Head>
             <main className={styles.main}>
-                <CharactersListComponent></CharactersListComponent>
+                <Container>
+                    <h1>Liste des personnages de Game Of Thrones</h1>
+                    <CharactersPageComponent></CharactersPageComponent>
+                </Container>
             </main>
         </>
     );
 }
+
+const Container = styled.li`
+    margin: 20px 0;
+    border: solid lightGrey 1px;
+    border-radius: 5px;
+    list-style: none;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+`;

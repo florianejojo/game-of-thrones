@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 export const useCharactersList = () => {
     const [data, setData] = useState([]);
+    const [cachedData, setCachedData] = useState(new Map());
+
     const [actualPage, setActualPage] = useState(1);
     const [maxPageNumber, setMaxPageNumber] = useState(0);
 
@@ -23,14 +25,26 @@ export const useCharactersList = () => {
         return pageNumber ? parseInt(pageNumber, 10) : null;
     };
 
+    const pageUrlToFetch = `https://www.anapioficeandfire.com/api/characters?page=${actualPage}`;
+
     useEffect(() => {
-        console.log({ actualPage });
+        console.log({ cachedData });
+    }, [cachedData]);
+
+    useEffect(() => {
+        const pageInCache = cachedData.get(pageUrlToFetch);
+        if (pageInCache) return setData(pageInCache);
+
         const fetchCharacters = async () => {
             try {
-                const response = await axios.get(
-                    `https://www.anapioficeandfire.com/api/characters?page=${actualPage}`
-                );
+                const response = await axios.get(pageUrlToFetch);
+
+                const newCachedData = cachedData;
+                newCachedData.set(response.config.url, response.data);
+
+                setCachedData(newCachedData);
                 setData(response.data);
+
                 const pageNumber = findMaxPageNumber(response.headers.link);
                 setMaxPageNumber(pageNumber || 0);
             } catch (error) {
