@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import CharacterCardComponent from "./CharacterCard.component";
+import CharacterCardComponent from "./FullCharacterCard.component";
 
 interface Character {
     url: string;

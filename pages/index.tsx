@@ -1,13 +1,7 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
-import { useEffect } from "react";
-import { styled } from "styled-components";
+import Head from "next/head";
+import Link from "next/link";
 
-import CharactersPageComponent from "@/components/CharactersPage.component";
-import Pagination from "@/components/Pagination.component";
-export default function Home() {
+const Home = () => {
     return (
         <>
             <Head>
@@ -21,22 +15,12 @@ export default function Home() {
                     content="width=device-width, initial-scale=1"
                 />
             </Head>
-            <main className={styles.main}>
-                <Container>
-                    <h1>Liste des personnages de Game Of Thrones</h1>
-                    <CharactersPageComponent></CharactersPageComponent>
-                </Container>
+            <main>
+                <Link href="/books">Voir les livres</Link>
+                <Link href="/characters">Voir les personnages</Link>
             </main>
         </>
     );
-}
+};
 
-const Container = styled.li`
-    margin: 20px 0;
-    border: solid lightGrey 1px;
-    border-radius: 5px;
-    list-style: none;
-    padding: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-`;
+export default Home;

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export const useCharactersList = () => {
+export const useCharactersPage = () => {
     const [data, setData] = useState([]);
     const [cachedData, setCachedData] = useState(new Map());
 
@@ -26,10 +26,6 @@ export const useCharactersList = () => {
     };
 
     const pageUrlToFetch = `https://www.anapioficeandfire.com/api/characters?page=${actualPage}`;
-
-    useEffect(() => {
-        console.log({ cachedData });
-    }, [cachedData]);
 
     useEffect(() => {
         const pageInCache = cachedData.get(pageUrlToFetch);

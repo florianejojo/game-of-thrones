@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { useCharactersList } from "hooks/useCharactersList.hook";
+import { useCharactersPage } from "@/hooks/useCharactersPage.hook";
 import Pagination, { PaginationButton } from "components/Pagination.component";
-import CharacterCardComponent from "./CharacterCard.component";
-import CharacterFromListComponent from "./CharacterFromList.component";
+import CharacterFromListComponent from "components/CharacterFromList.component";
+import { Container } from "./books";
 
 interface Character {
     url: string;
@@ -22,18 +22,15 @@ interface Character {
     tvSeries: string[];
     playedBy: string[];
 }
-interface CharacterFromListComponentProps {
-    character: Character;
-}
 
-const CharactersPageComponent: React.FC<
-    CharacterFromListComponentProps
-> = () => {
+const CharactersPage: React.FC = () => {
     const { characters, actualPage, setActualPage, maxPageNumber } =
-        useCharactersList();
+        useCharactersPage();
 
     return (
-        <div>
+        <Container>
+            <h1>Liste des personnages de Game Of Thrones</h1>
+
             <CharactersList>
                 {characters.map((character: Character, index: number) => {
                     return (
@@ -68,11 +65,11 @@ const CharactersPageComponent: React.FC<
                     Page suivante
                 </PaginationButton>
             </PaginationContainer>
-        </div>
+        </Container>
     );
 };
 
-export default CharactersPageComponent;
+export default CharactersPage;
 
 const CharactersList = styled.div`
     /* display: flex; */
@@ -86,3 +83,13 @@ const PaginationContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
 `;
+
+// const Container = styled.div`
+//     margin: 20px 0;
+//     border: solid lightGrey 1px;
+//     border-radius: 5px;
+//     list-style: none;
+//     padding: 20px;
+//     max-width: 900px;
+//     margin: 0 auto;
+// `;

@@ -24,8 +24,8 @@ const Pagination: React.FC<PaginationProps> = ({
         <StyledPagination>
             <PaginationButton
                 onClick={() => setActualPage(1)}
-                isActualPage={actualPage === 1}
-                isBorderBold
+                isactualpage={actualPage === 1 ? "true" : "flase"}
+                isborderbold="true"
             >
                 1
             </PaginationButton>
@@ -39,7 +39,9 @@ const Pagination: React.FC<PaginationProps> = ({
                                 setActualPage(pageNumber);
                             }}
                             key={index}
-                            isActualPage={actualPage === pageNumber}
+                            isactualpage={
+                                actualPage === pageNumber ? "true" : "false"
+                            }
                         >
                             {pageNumber}
                         </PaginationButton>
@@ -48,8 +50,8 @@ const Pagination: React.FC<PaginationProps> = ({
             {/* {actualPage < numberOfPages - 1 && <span>...</span>} */}
             <PaginationButton
                 onClick={() => setActualPage(numberOfPages)}
-                isActualPage={actualPage === numberOfPages}
-                isBorderBold
+                isactualpage={actualPage === numberOfPages ? "true" : "flase"}
+                isborderbold="true"
             >
                 {numberOfPages}
             </PaginationButton>
@@ -65,22 +67,22 @@ const StyledPagination = styled.div`
 `;
 
 interface PaginationButtonProps {
-    isActualPage?: boolean;
-    isBorderBold?: boolean;
+    isactualpage?: string;
+    isborderbold?: string;
 }
 
-export const PaginationButton = styled.div<PaginationButtonProps>`
+export const PaginationButton = styled.button<PaginationButtonProps>`
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
     border: solid lightgrey
-        ${({ isBorderBold }) => (isBorderBold ? "2px" : "1px")};
+        ${({ isborderbold }) => (isborderbold === "true" ? "2px" : "1px")};
     border-radius: 5px;
     margin: 0 10px;
     cursor: pointer;
-    background-color: ${({ isActualPage }) =>
-        isActualPage ? "lightgrey" : ""};
+    background-color: ${({ isactualpage }) =>
+        isactualpage === "true" ? "lightgrey" : ""};
     min-width: 20px;
     min-height: 20px;
 `;
