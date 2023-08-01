@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { styled } from "styled-components";
 
 import CharactersPageComponent from "@/components/CharactersPage.component";
-import Pagination from "@/components/Pagination.component";
+import Pagination from "@/components/Characters/Pagination.component";
 import { useFetchBooks } from "@/hooks/useFetchBook.hook";
 import Book from "@/components/Books/Book.component";
 import { useFetchAllBooks } from "@/hooks/useFetchAllBooks.hook";

@@ -1,9 +1,14 @@
-import React, { useState } from "react";
-import { styled } from "styled-components";
+import React from "react";
+
 import { useCharactersPage } from "@/hooks/useCharactersPage.hook";
-import Pagination, { PaginationButton } from "components/Pagination.component";
-import CharacterFromListComponent from "components/CharacterFromList.component";
-import { Container } from "./books";
+import Pagination from "@/components/Characters/Pagination.component";
+
+import { FlexRow } from "@/styles/global.style";
+import PaginationButton from "@/styles/characters.style";
+import Header from "@/components/common/Header";
+import { styled } from "styled-components";
+import Link from "next/link";
+import { getIdFromUrl } from "@/utils/getIdFromUrl";
 
 interface Character {
     url: string;
@@ -27,69 +32,73 @@ const CharactersPage: React.FC = () => {
     const { characters, actualPage, setActualPage, maxPageNumber } =
         useCharactersPage();
 
+    const incrementPage = () => {
+        if (actualPage >= maxPageNumber) return;
+        setActualPage(actualPage + 1);
+    };
+
+    const decrementPage = () => {
+        if (actualPage <= 1) return;
+        setActualPage(actualPage - 1);
+    };
+
+    const leftChevron = "<";
+    const rightChevron = ">";
+
     return (
-        <Container>
-            <h1>Liste des personnages de Game Of Thrones</h1>
+        <>
+            <Header title={"CHARACTERS"} />
 
-            <CharactersList>
-                {characters.map((character: Character, index: number) => {
-                    return (
-                        <CharacterFromListComponent
-                            key={index}
-                            character={character}
-                        />
-                    );
-                })}
-            </CharactersList>
+            <FlexRow>
+                <PaginationButton onClick={decrementPage}>
+                    {leftChevron}
+                </PaginationButton>
 
-            <PaginationContainer>
-                <PaginationButton
-                    onClick={() => {
-                        if (actualPage <= 1) return;
-                        setActualPage(actualPage - 1);
-                    }}
-                >
-                    Page précédente
+                <FlexRow>
+                    <Pagination
+                        numberOfPages={maxPageNumber}
+                        actualPage={actualPage}
+                        setActualPage={setActualPage}
+                    />
+                </FlexRow>
+
+                <PaginationButton onClick={incrementPage}>
+                    {rightChevron}
                 </PaginationButton>
-                <Pagination
-                    numberOfPages={maxPageNumber}
-                    actualPage={actualPage}
-                    setActualPage={setActualPage}
-                />
-                <PaginationButton
-                    onClick={() => {
-                        if (actualPage >= maxPageNumber) return;
-                        setActualPage(actualPage + 1);
-                    }}
-                >
-                    Page suivante
-                </PaginationButton>
-            </PaginationContainer>
-        </Container>
+            </FlexRow>
+
+            {characters.map((character: Character, index: number) => {
+                const characterId = getIdFromUrl(character.url);
+                return (
+                    <SmallCharacterCard key={index}>
+                        <Link
+                            href={`/characters/${characterId}`}
+                            passHref
+                            prefetch
+                        >
+                            {character.name && <a>Name : {character.name}</a>}
+                            {character.aliases[0] && (
+                                <a>Alias : {character.aliases[0]}</a>
+                            )}
+                        </Link>
+                    </SmallCharacterCard>
+                );
+            })}
+        </>
     );
 };
 
 export default CharactersPage;
 
-const CharactersList = styled.div`
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* border: solid pink 1px; */
+const SmallCharacterCard = styled.li`
+    margin: 20px 0;
+    border: solid lightGrey 1px;
+    border-radius: 5px;
+    list-style: none;
+    padding: 20px;
+    cursor: pointer;
+    a {
+        color: white;
+        text-decoration: none;
+    }
 `;
-
-const PaginationContainer = styled.div`
-    /* border: solid red 3px; */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-`;
-
-// const Container = styled.div`
-//     margin: 20px 0;
-//     border: solid lightGrey 1px;
-//     border-radius: 5px;
-//     list-style: none;
-//     padding: 20px;
-//     max-width: 900px;
-//     margin: 0 auto;
-// `;

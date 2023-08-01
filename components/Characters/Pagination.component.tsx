@@ -1,3 +1,5 @@
+import PaginationButton from "@/styles/characters.style";
+import { FlexRow } from "@/styles/global.style";
 import React from "react";
 import { styled } from "styled-components";
 
@@ -12,16 +14,10 @@ const Pagination: React.FC<PaginationProps> = ({
     actualPage,
     setActualPage,
 }) => {
-    const pagesDisplayed = [
-        actualPage - 2,
-        actualPage - 1,
-        actualPage,
-        actualPage + 1,
-        actualPage + 2,
-    ];
+    const pagesDisplayed = [actualPage - 1, actualPage, actualPage + 1];
 
     return (
-        <StyledPagination>
+        <FlexRow>
             <PaginationButton
                 onClick={() => setActualPage(1)}
                 isactualpage={actualPage === 1 ? "true" : "flase"}
@@ -29,15 +25,12 @@ const Pagination: React.FC<PaginationProps> = ({
             >
                 1
             </PaginationButton>
-            {/* {actualPage > 2 && <span>...</span>} */}
             {pagesDisplayed
                 .filter((page) => page > 1 && page < numberOfPages)
                 .map((pageNumber, index) => {
                     return (
                         <PaginationButton
-                            onClick={() => {
-                                setActualPage(pageNumber);
-                            }}
+                            onClick={() => setActualPage(pageNumber)}
                             key={index}
                             isactualpage={
                                 actualPage === pageNumber ? "true" : "false"
@@ -47,7 +40,6 @@ const Pagination: React.FC<PaginationProps> = ({
                         </PaginationButton>
                     );
                 })}
-            {/* {actualPage < numberOfPages - 1 && <span>...</span>} */}
             <PaginationButton
                 onClick={() => setActualPage(numberOfPages)}
                 isactualpage={actualPage === numberOfPages ? "true" : "flase"}
@@ -55,34 +47,8 @@ const Pagination: React.FC<PaginationProps> = ({
             >
                 {numberOfPages}
             </PaginationButton>
-        </StyledPagination>
+        </FlexRow>
     );
 };
 
 export default Pagination;
-
-const StyledPagination = styled.div`
-    display: flex;
-    flex-direction: row;
-`;
-
-interface PaginationButtonProps {
-    isactualpage?: string;
-    isborderbold?: string;
-}
-
-export const PaginationButton = styled.button<PaginationButtonProps>`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    border: solid lightgrey
-        ${({ isborderbold }) => (isborderbold === "true" ? "2px" : "1px")};
-    border-radius: 5px;
-    margin: 0 10px;
-    cursor: pointer;
-    background-color: ${({ isactualpage }) =>
-        isactualpage === "true" ? "lightgrey" : ""};
-    min-width: 20px;
-    min-height: 20px;
-`;

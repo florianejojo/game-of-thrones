@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import Pagination, { PaginationButton } from "components/Pagination.component";
+import Pagination from "@/components/Characters/Pagination.component";
 import { CardRadius } from "@/styles/global.style";
-import SmallBookCardComponent from "./Books/SmallBookCard.component";
+import SmallBookCardComponent from "../Books/SmallBookCard.component";
 
 interface Character {
     url: string;
@@ -25,14 +25,8 @@ interface Character {
 interface FullCharacterCardComponentProps {
     character: Character;
 }
-interface CharacterData {
-    label: string;
-    value: string | JSX.Element[];
-}
 
-const FullCharacterCard: React.FC<FullCharacterCardComponentProps> = ({
-    character,
-}) => {
+const FullCharacterCard = ({ character }: FullCharacterCardComponentProps) => {
     const singleCaracteristics = [
         { label: "culture", value: character.culture },
         { label: "born", value: character.born },
@@ -54,17 +48,13 @@ const FullCharacterCard: React.FC<FullCharacterCardComponentProps> = ({
 
     return (
         <StyledFullCharacterCard>
-            <h2>{character.name ? character.name : "Nom inconnu"}</h2>
             <ul>
                 {singleCaracteristics.map(({ label, value }, index) => {
-                    console.log("value", value);
                     return (
                         value && (
-                            <div key={index}>
-                                <p>
-                                    {label} : {value}
-                                </p>
-                            </div>
+                            <p key={index}>
+                                {label} : {value}
+                            </p>
                         )
                     );
                 })}
@@ -99,10 +89,6 @@ export default FullCharacterCard;
 
 const StyledFullCharacterCard = styled.div`
     ${CardRadius}
-
-    ul {
-        list-style: none;
-    }
 `;
 
 const StyledCard = styled.span`

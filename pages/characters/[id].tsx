@@ -1,20 +1,13 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
-import { useEffect } from "react";
+import axios from "axios";
+import Header from "@/components/common/Header";
+import { CardRadius } from "@/styles/global.style";
+import SmallBookCardComponent from "@/components/Books/SmallBookCard.component";
+import CharacteristicsLayout, {
+    StyledCharacteristicsLayout,
+} from "@/components/Characters/CharacteristicsLayout.component";
 import { styled } from "styled-components";
 
-import CharactersPageComponent from "@/components/CharactersPage.component";
-import Pagination from "@/components/Pagination.component";
-import { useFetchBooks } from "@/hooks/useFetchBook.hook";
-import Book from "@/components/Books/Book.component";
-import { useFetchAllBooks } from "@/hooks/useFetchAllBooks.hook";
-import FullCharacterCard from "@/components/FullCharacterCard.component";
-import axios from "axios";
-import { GetServerSideProps } from "next";
 interface Character {
-    id: string;
     name: string;
     culture: string;
     born: string;
@@ -36,39 +29,86 @@ interface CharacterDetailsPageProps {
 }
 
 const CharacterDetailsPage = ({ character }: CharacterDetailsPageProps) => {
-    // il faut l'id du charactere
+    const singleCaracteristics = [
+        { label: "culture", value: character.culture },
+        { label: "born", value: character.born },
+        { label: "died", value: character.died },
+        { label: "father", value: character.father },
+        { label: "mother", value: character.mother },
+        { label: "spouse", value: character.spouse },
+    ];
+
+    const listsCaracteristics = [
+        { label: "titles", value: character.titles },
+        { label: "aliases", value: character.aliases },
+        { label: "allegiances", value: character.allegiances },
+        { label: "povBooks", value: character.povBooks },
+        { label: "tvSeries", value: character.tvSeries },
+        { label: "playedBy", value: character.playedBy },
+    ];
+
+    const title = character.name ? character.name : character.aliases[0];
 
     return (
         <>
-            <Head>
-                <title>GOT characters & books</title>
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1"
-                />
-            </Head>
+            <Header title={title} />
+            <StyledCharacterDetailsCard>
+                {singleCaracteristics.map(({ label, value }, index) => {
+                    console.log({ value });
 
-            <Container>
-                <FullCharacterCard character={character}></FullCharacterCard>
-            </Container>
+                    return (
+                        value && (
+                            <CharacteristicsLayout
+                                key={index}
+                                label={label}
+                                value={value}
+                            />
+                        )
+                    );
+                })}
+
+                {listsCaracteristics.map(({ label, value }, index) => {
+                    return (
+                        value.length > 0 && (
+                            <CharacteristicsLayout
+                                label={label}
+                                value={value.map(
+                                    (caracteristicVersion, index) => {
+                                        return (
+                                            caracteristicVersion && (
+                                                <span key={index}>
+                                                    "{caracteristicVersion}"
+                                                </span>
+                                            )
+                                        );
+                                    }
+                                )}
+                                key={index}
+                            ></CharacteristicsLayout>
+                        )
+                    );
+                })}
+
+                <BooksList>
+                    <h3>BOOKS: </h3>
+                    {character.books.map((book, index) => {
+                        return (
+                            <SmallBookCardComponent
+                                key={index}
+                                bookUrl={book}
+                            />
+                        );
+                    })}
+                </BooksList>
+            </StyledCharacterDetailsCard>
         </>
     );
 };
 
 export default CharacterDetailsPage;
 
-export const Container = styled.div`
-    /* border: solid lightGrey 1px; */
-    border-radius: 5px;
-    list-style: none;
-    padding: 20px;
-    max-width: 900px;
-    margin: 20px auto;
-`;
-
 export const getServerSideProps = async ({ resolvedUrl }) => {
     const apiUrl = "https://www.anapioficeandfire.com/api";
-
     const response = await axios.get(apiUrl + resolvedUrl);
 
     return {
@@ -77,3 +117,19 @@ export const getServerSideProps = async ({ resolvedUrl }) => {
         },
     };
 };
+
+const StyledCharacterDetailsCard = styled.div`
+    max-width: 400px;
+    margin: 30px auto;
+    border: solid 1px;
+    border-radius: 5px;
+    padding: 70px;
+`;
+
+const BooksList = styled.ul`
+    h3 {
+        color: white;
+    }
+    color: brown;
+    /* border: solid pink 2px; */
+`;

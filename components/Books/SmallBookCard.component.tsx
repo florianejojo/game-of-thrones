@@ -16,6 +16,4 @@ const SmallBookCardComponent = ({ bookUrl }: BookProps) => {
 
 export default SmallBookCardComponent;
 
-const StyledSmallBookCard = styled.span`
-    ${CardRadius}
-`;
+const StyledSmallBookCard = styled.div``;
