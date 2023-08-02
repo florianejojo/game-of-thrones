@@ -1,13 +1,19 @@
 import { css, createGlobalStyle, styled } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
-  body{
+  *{
     box-sizing: border-box;
     font-family: Open-Sans, Helvetica, Sans-Serif;
+   
+  
+  }
+
+  body {
     background-color: #1d1d1d;
     color: #ffffff;
     text-align: center;
-    padding: 20px;
+      padding: 20px;
+
   }
   
   h1 {
@@ -17,9 +23,16 @@ export const GlobalStyle = createGlobalStyle`
         list-style: none;
         padding: 0;
     }
+  a {
+      text-decoration: none;
+  }
+  div {
+    padding: 0;
+    margin: 0;
+  }
 `;
 
-export const CardRadius = styled.div`
+export const CardRadius = css`
     margin: 20px 0;
     border: solid grey 1px;
     border-radius: 5px;
@@ -40,4 +53,19 @@ export const PageContainer = styled.div`
     max-width: 900px;
     margin: 0 auto;
     min-height: calc(100vh - 120px);
+`;
+
+export const BigButton = css`
+    box-sizing: border-box;
+    ${CardRadius}
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+    border: solid lightGrey 1px;
+    font-size: 18px;
+    cursor: pointer;
+    color: brown;
+    a {
+        color: brown;
+    }
 `;
