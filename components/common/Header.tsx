@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { styled } from "styled-components";
 
 interface HeaderProps {
@@ -6,7 +7,10 @@ interface HeaderProps {
 const Header = ({ title }: HeaderProps) => {
     return (
         <StyledHeader>
-            <h1>Game Of Thrones</h1>
+            <Link href="/">
+                <h1>Game Of Thrones</h1>
+            </Link>
+
             <h2>{title}</h2>
             <p>Winter is coming...</p>
         </StyledHeader>
@@ -19,5 +23,8 @@ const StyledHeader = styled.header`
     margin-top: 50px;
     h1 {
         margin-bottom: 50px;
+        cursor: pointer;
+        color: white;
+        text-decoration: none;
     }
 `;

@@ -19,7 +19,7 @@ const Home = () => {
                     content="width=device-width, initial-scale=1"
                 />
             </Head>
-            <Header h1={"Game Of Thrones"} h2={"Books & Characters"} />
+            <Header title={"Books & Characters"} />
 
             <main>
                 <button>

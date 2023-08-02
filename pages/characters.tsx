@@ -76,9 +76,9 @@ const CharactersPage: React.FC = () => {
                             passHref
                             prefetch
                         >
-                            {character.name && <a>Name : {character.name}</a>}
+                            {character.name && <p>Name : {character.name}</p>}
                             {character.aliases[0] && (
-                                <a>Alias : {character.aliases[0]}</a>
+                                <p>Alias : {character.aliases[0]}</p>
                             )}
                         </Link>
                     </SmallCharacterCard>
@@ -97,7 +97,7 @@ const SmallCharacterCard = styled.li`
     list-style: none;
     padding: 20px;
     cursor: pointer;
-    a {
+    p {
         color: white;
         text-decoration: none;
     }

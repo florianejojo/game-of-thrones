@@ -1,4 +1,10 @@
 {
-  "presets": ["next/babel"],
-  "plugins": ["styled-components"]
+    "presets": [
+        "next/babel",
+        "@babel/preset-env",
+        "@babel/preset-react"
+    ],
+    "plugins": [
+        "styled-components"
+    ]
 }

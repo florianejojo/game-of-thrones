@@ -1,10 +1,7 @@
 import axios from "axios";
 import Header from "@/components/common/Header";
-import { CardRadius } from "@/styles/global.style";
 import SmallBookCardComponent from "@/components/Books/SmallBookCard.component";
-import CharacteristicsLayout, {
-    StyledCharacteristicsLayout,
-} from "@/components/Characters/CharacteristicsLayout.component";
+import CharacteristicsLayout from "@/components/Characters/CharacteristicsLayout.component";
 import { styled } from "styled-components";
 
 interface Character {
@@ -35,15 +32,15 @@ const CharacterDetailsPage = ({ character }: CharacterDetailsPageProps) => {
         { label: "died", value: character.died },
         { label: "father", value: character.father },
         { label: "mother", value: character.mother },
-        { label: "spouse", value: character.spouse },
+        // { label: "spouse", value: character.spouse },
     ];
 
     const listsCaracteristics = [
         { label: "titles", value: character.titles },
         { label: "aliases", value: character.aliases },
-        { label: "allegiances", value: character.allegiances },
+        // { label: "allegiances", value: character.allegiances },
         { label: "povBooks", value: character.povBooks },
-        { label: "tvSeries", value: character.tvSeries },
+        // { label: "tvSeries", value: character.tvSeries },
         { label: "playedBy", value: character.playedBy },
     ];
 
@@ -76,9 +73,9 @@ const CharacterDetailsPage = ({ character }: CharacterDetailsPageProps) => {
                                     (caracteristicVersion, index) => {
                                         return (
                                             caracteristicVersion && (
-                                                <span key={index}>
+                                                <p key={index}>
                                                     "{caracteristicVersion}"
-                                                </span>
+                                                </p>
                                             )
                                         );
                                     }
@@ -107,7 +104,11 @@ const CharacterDetailsPage = ({ character }: CharacterDetailsPageProps) => {
 
 export default CharacterDetailsPage;
 
-export const getServerSideProps = async ({ resolvedUrl }) => {
+export const getServerSideProps = async ({
+    resolvedUrl,
+}: {
+    resolvedUrl: string;
+}) => {
     const apiUrl = "https://www.anapioficeandfire.com/api";
     const response = await axios.get(apiUrl + resolvedUrl);
 
@@ -123,13 +124,13 @@ const StyledCharacterDetailsCard = styled.div`
     margin: 30px auto;
     border: solid 1px;
     border-radius: 5px;
-    padding: 70px;
+    padding: 20px;
 `;
 
-const BooksList = styled.ul`
+const BooksList = styled.div`
     h3 {
         color: white;
     }
     color: brown;
-    /* border: solid pink 2px; */
+    margin-top: 70px;
 `;
