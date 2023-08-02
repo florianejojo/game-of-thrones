@@ -12,7 +12,7 @@ const CharacteristicsLayout = ({
 }: CharacteristicsLayoutProps) => {
     return (
         <StyledCharacteristicsLayout>
-            <Label>{label}:</Label>
+            <Label>{label}</Label>
             <Value>{value}</Value>
         </StyledCharacteristicsLayout>
     );
@@ -20,19 +20,13 @@ const CharacteristicsLayout = ({
 
 export default CharacteristicsLayout;
 
-export const StyledCharacteristicsLayout = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    margin: 0 auto;
-    height: 50px;
-`;
+export const StyledCharacteristicsLayout = styled.div``;
 
-const Label = styled.span`
+const Label = styled.p`
     font-weight: bold;
     margin-right: 5px;
 `;
 
-const Value = styled.span`
+const Value = styled.p`
     color: brown;
 `;

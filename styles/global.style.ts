@@ -15,6 +15,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   ul {
         list-style: none;
+        padding: 0;
     }
 `;
 
@@ -38,5 +39,5 @@ export const PageContainer = styled.div`
     padding: 20px;
     max-width: 900px;
     margin: 0 auto;
-    height: 100 vh;
+    min-height: calc(100vh - 120px);
 `;

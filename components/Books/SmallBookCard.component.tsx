@@ -1,10 +1,6 @@
 import { useFetchBook } from "@/hooks/useFetchBook.hook";
-import { CardRadius } from "@/styles/global.style";
-
 import { styled } from "styled-components";
-interface Book {
-    name: string;
-}
+
 interface BookProps {
     bookUrl: string;
 }
