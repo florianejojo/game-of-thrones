@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import Pagination from "@/components/Characters/Pagination.component";
 import { CardRadius } from "@/styles/global.style";
 import SmallBookCardComponent from "../Books/SmallBookCard.component";
 

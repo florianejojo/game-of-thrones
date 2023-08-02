@@ -7,7 +7,7 @@ const PaginationButton = styled.button<PaginationButtonProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 5px;
     border: solid lightgrey
         ${({ isborderbold }) => (isborderbold === "true" ? "2px" : "1px")};
     border-radius: 5px;

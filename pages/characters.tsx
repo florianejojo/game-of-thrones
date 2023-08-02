@@ -5,7 +5,7 @@ import Pagination from "@/components/Characters/Pagination.component";
 
 import { FlexRow } from "@/styles/global.style";
 import PaginationButton from "@/styles/characters.style";
-import Header from "@/components/common/Header";
+import Header from "@/components/common/Header.component";
 import { styled } from "styled-components";
 import Link from "next/link";
 import { getIdFromUrl } from "@/utils/getIdFromUrl";

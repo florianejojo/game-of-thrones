@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { useFetchAllBooks } from "@/hooks/useFetchAllBooks.hook";
-import Header from "@/components/common/Header";
+import Header from "@/components/common/Header.component";
 
 interface Book {
     name: string;

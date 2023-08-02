@@ -1,5 +1,5 @@
 import axios from "axios";
-import Header from "@/components/common/Header";
+import Header from "@/components/common/Header.component";
 import SmallBookCardComponent from "@/components/Books/SmallBookCard.component";
 import CharacteristicsLayout from "@/components/Characters/CharacteristicsLayout.component";
 import { styled } from "styled-components";
