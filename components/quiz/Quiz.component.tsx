@@ -1,17 +1,25 @@
 import { BigButton, CardRadius } from "@/styles/global.style";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 interface Answer {
     questionIndex: number;
     answerIndex: number;
 }
 
+interface QuizAnswer {
+    label: string;
+    isRightAnswer: boolean;
+}
+interface QuizQuestion {
+    question: string;
+    answer: QuizAnswer[];
+}
 const QuizComponent = ({
     setScore,
     quizQuestions,
 }: {
     setScore: Function;
-    quizQuestions: object[];
+    quizQuestions: QuizQuestion[];
 }) => {
     const [answers, setAnswers] = useState<Answer[]>(
         new Array(quizQuestions.length)
@@ -53,36 +61,38 @@ const QuizComponent = ({
     return (
         <div>
             <h3>QUIZ</h3>
-            {quizQuestions.map((question, questionIndex) => {
-                const questionNum = `Question ${questionIndex + 1}`;
-                return (
-                    <QuestionBlock key={questionIndex}>
-                        <p>Question {questionIndex + 1}</p>
-                        <p>{question.question}</p>
-                        <Answers>
-                            {question.answer.map((answer, index) => {
-                                return (
-                                    <AnswerOption
-                                        key={index}
-                                        onClick={() => {
-                                            handleAnswerSelection(
-                                                questionIndex,
-                                                index
-                                            );
-                                        }}
-                                        disabled={
-                                            answers[questionIndex]
-                                                ?.answerIndex === index
-                                        }
-                                    >
-                                        {answer.label}
-                                    </AnswerOption>
-                                );
-                            })}
-                        </Answers>
-                    </QuestionBlock>
-                );
-            })}
+            {quizQuestions.map(
+                (question: QuizQuestion, questionIndex: number) => {
+                    const questionNum = `Question ${questionIndex + 1}`;
+                    return (
+                        <QuestionBlock key={questionIndex}>
+                            <p>{questionNum}</p>
+                            <p>{question.question}</p>
+                            <Answers>
+                                {question.answer.map((answer, index) => {
+                                    return (
+                                        <AnswerOption
+                                            key={index}
+                                            onClick={() => {
+                                                handleAnswerSelection(
+                                                    questionIndex,
+                                                    index
+                                                );
+                                            }}
+                                            disabled={
+                                                answers[questionIndex]
+                                                    ?.answerIndex === index
+                                            }
+                                        >
+                                            {answer.label}
+                                        </AnswerOption>
+                                    );
+                                })}
+                            </Answers>
+                        </QuestionBlock>
+                    );
+                }
+            )}
             <Button onClick={handleSubmit}>Submit</Button>
         </div>
     );
