@@ -30,18 +30,11 @@ const CharacterDetailsPage = ({ character }: CharacterDetailsPageProps) => {
         { label: "culture", value: character.culture },
         { label: "born", value: character.born },
         { label: "died", value: character.died },
-        { label: "father", value: character.father },
-        { label: "mother", value: character.mother },
-        // { label: "spouse", value: character.spouse },
     ];
 
     const listsCaracteristics = [
         { label: "titles", value: character.titles },
         { label: "aliases", value: character.aliases },
-        // { label: "allegiances", value: character.allegiances },
-        { label: "povBooks", value: character.povBooks },
-        // { label: "tvSeries", value: character.tvSeries },
-        { label: "playedBy", value: character.playedBy },
     ];
 
     const title = character.name ? character.name : character.aliases[0];
@@ -51,15 +44,11 @@ const CharacterDetailsPage = ({ character }: CharacterDetailsPageProps) => {
             <Header title={title} />
             <StyledCharacterDetailsCard>
                 {singleCaracteristics.map(({ label, value }, index) => {
-                    console.log({ value });
-
                     return (
                         value && (
-                            <CharacteristicsLayout
-                                key={index}
-                                label={label}
-                                value={value}
-                            />
+                            <CharacteristicsLayout key={index} label={label}>
+                                {value}
+                            </CharacteristicsLayout>
                         )
                     );
                 })}
@@ -67,21 +56,23 @@ const CharacterDetailsPage = ({ character }: CharacterDetailsPageProps) => {
                 {listsCaracteristics.map(({ label, value }, index) => {
                     return (
                         value.length > 0 && (
-                            <CharacteristicsLayout
-                                label={label}
-                                value={value.map(
-                                    (caracteristicVersion, index) => {
+                            <CharacteristicsLayout label={label} key={index}>
+                                {value.map(
+                                    (
+                                        caracteristicVersion: string,
+                                        index: number
+                                    ) => {
                                         return (
                                             caracteristicVersion && (
                                                 <p key={index}>
-                                                    "{caracteristicVersion}"
+                                                    &quot;{caracteristicVersion}
+                                                    &quot;
                                                 </p>
                                             )
                                         );
                                     }
                                 )}
-                                key={index}
-                            ></CharacteristicsLayout>
+                            </CharacteristicsLayout>
                         )
                     );
                 })}

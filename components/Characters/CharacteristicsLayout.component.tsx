@@ -1,19 +1,19 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 
 interface CharacteristicsLayoutProps {
     label: string;
-    value: (Element | null)[];
+    children: ReactNode;
 }
 
 const CharacteristicsLayout = ({
     label,
-    value,
+    children,
 }: CharacteristicsLayoutProps) => {
     return (
         <StyledCharacteristicsLayout>
             <Label>{label}</Label>
-            <Value>{value}</Value>
+            <Value>{children}</Value>
         </StyledCharacteristicsLayout>
     );
 };

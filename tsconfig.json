@@ -20,7 +20,12 @@
             "@/*": ["./*"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/questions.js"],
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        "utils/quizQuestions.js"
+    ],
     "exclude": ["node_modules"]
 }
 

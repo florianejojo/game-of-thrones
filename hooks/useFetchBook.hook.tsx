@@ -11,7 +11,6 @@ export const useFetchBook = (url: string) => {
         const fetchBook = async () => {
             try {
                 const response = await axios.get(url);
-                console.log({ response });
                 setBook(response.data);
             } catch (error) {
                 console.log({ error });

@@ -6,7 +6,7 @@ import ButtonLinkComponent from "./ButtonLink.component";
 describe("ButtonLink", () => {
     it("renders correctly with the provided label", () => {
         const href = "/characters";
-        const label = "Voir les personnages";
+        const label = "See Characters";
 
         const { getByText } = render(
             <ButtonLinkComponent href={href} label={label} />

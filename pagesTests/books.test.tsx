@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import BooksPage from "./books";
+import BooksPage from "../pages/books";
 
 jest.mock("../hooks/useFetchAllBooks.hook", () => ({
     useFetchAllBooks: jest.fn(() => ({

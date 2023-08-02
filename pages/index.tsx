@@ -5,7 +5,7 @@ import { CardRadius, BigButton } from "@/styles/global.style";
 
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
-import quizQuestions from "utils/questions.js";
+import quizQuestions from "../utils/quizQuestions";
 
 const Home = () => {
     const [isQuizDisplayed, setIsQuizDisplayed] = useState(false);
@@ -30,11 +30,8 @@ const Home = () => {
             <main>
                 {!isQuizDisplayed && score === null && (
                     <ButtonsSection>
-                        <ButtonLink
-                            href="/characters"
-                            label="Voir les personnages"
-                        />
-                        <ButtonLink href="/books" label="Voir les livres" />
+                        <ButtonLink href="/characters" label="See Characters" />
+                        <ButtonLink href="/books" label="See Books" />
                         <Button onClick={() => setIsQuizDisplayed(true)}>
                             Take the quiz
                         </Button>
